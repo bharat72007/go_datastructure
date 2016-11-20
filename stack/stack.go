@@ -15,9 +15,9 @@ type Stack struct {
 
 //Operations Contract for Stack
 type Operations interface {
-	Pop() int
+	Pop() (int, error)
 	Push(x int) int
-	Peek() int
+	Peek() (int, error)
 }
 
 //Pop Operation, where element is poped off from the top of Stack
