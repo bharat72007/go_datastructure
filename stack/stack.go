@@ -21,15 +21,16 @@ type Operations interface {
 }
 
 //Pop Operation, where element is poped off from the top of Stack
-func (stack *Stack) Pop() (int, error) {
+func (stack *Stack) Pop() (top int, err error) {
 	if stack.curr_size > 0 {
-		topEle := stack.elements[stack.top]
+		top = stack.elements[stack.top]
 		stack.elements = stack.elements[:stack.curr_size-1]
 		stack.top -= 1
 		stack.curr_size -= 1
-		return topEle, nil
+		return
 	}
-	return 0, go_datastructure.ErrorUnderFlow
+	err = go_datastructure.ErrorUnderFlow
+	return
 }
 
 //Push Operation, where element is added at the top of Stack
@@ -42,16 +43,18 @@ func (stack *Stack) Push(x int) int {
 }
 
 //Peek Operation, where Top element of Stack can be seen.
-func (stack *Stack) Peek() (int, error) {
+func (stack *Stack) Peek() (top int, err error) {
 	if stack.curr_size > 0 {
-		topEle := stack.elements[stack.top]
-		return topEle, nil
+		top = stack.elements[stack.top]
+		return
 	}
-	return 0, go_datastructure.ErrorUnderFlow
+	err = go_datastructure.ErrorUnderFlow
+	return
 }
 
 //Initialize a Stack with initial values and return it
 func New() Stack {
+	//Initialization of Stack based using make
 	var stack Stack = Stack{curr_size: 0, top: -1, elements: make([]int, 0, 0)}
 	return stack
 }
