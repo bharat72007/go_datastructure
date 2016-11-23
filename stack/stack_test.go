@@ -28,7 +28,6 @@ func TestPush(t *testing.T) {
 
 func TestPeek(t *testing.T) {
 	stack := New()
-
 	var expected_peek int = 0
 	var actual_peek, err = stack.Peek()
 

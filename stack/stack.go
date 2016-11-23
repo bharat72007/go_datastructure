@@ -6,6 +6,7 @@
 package stack
 
 import "github.com/go_datastructure"
+import "github.com/go_datastructure/common/log"
 
 //Structure Stack conatins Backed Slice of Integer, Reference Top of Stack and Current Size of Stack
 type Stack struct {
@@ -44,6 +45,7 @@ func (stack *Stack) Push(x int) int {
 
 //Peek Operation, where Top element of Stack can be seen.
 func (stack *Stack) Peek() (top int, err error) {
+	log.InfoWithFields(top, logFields("Peeking into Stack"))
 	if stack.curr_size > 0 {
 		top = stack.elements[stack.top]
 		return
@@ -55,6 +57,11 @@ func (stack *Stack) Peek() (top int, err error) {
 //Initialize a Stack with initial values and return it
 func New() Stack {
 	//Initialization of Stack based using make
+	log.InfoWithFields("", logFields("Initializing Stack"))
 	var stack Stack = Stack{curr_size: 0, top: -1, elements: make([]int, 0, 0)}
 	return stack
+}
+
+func logFields(action string) log.Fields {
+	return log.Fields{"Action": action}
 }
