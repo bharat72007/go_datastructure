@@ -3,6 +3,8 @@ package log
 import (
 	"fmt"
 	"github.com/Sirupsen/logrus"
+	"github.com/rifflock/lfshook"
+	"io/ioutil"
 	"runtime"
 	"strings"
 )
@@ -16,13 +18,21 @@ func SetLogLevel(level logrus.Level) {
 	logger.Level = level
 }
 
+func SetLogOutputMode(info_File, err_File string) {
+	logger.Out = ioutil.Discard
+	logger.Hooks.Add(lfshook.NewHook(lfshook.PathMap{
+		logrus.InfoLevel:  info_File,
+		logrus.ErrorLevel: err_File,
+	}))
+
+}
+
 func SetLogFormatter(formatter string) {
 	if formatter == "JSON" {
 		logger.Formatter = new(logrus.JSONFormatter)
 	} else {
 		logger.Formatter = new(logrus.TextFormatter)
 	}
-
 }
 
 // Debug logs a message at level Debug on the standard logger.
