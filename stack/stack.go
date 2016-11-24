@@ -23,6 +23,7 @@ type Operations interface {
 
 //Pop Operation, where element is poped off from the top of Stack
 func (stack *Stack) Pop() (top int, err error) {
+	log.InfoWithFields("Pop from Stack", log.Fields{"top": top})
 	if stack.curr_size > 0 {
 		top = stack.elements[stack.top]
 		stack.elements = stack.elements[:stack.curr_size-1]
@@ -36,6 +37,7 @@ func (stack *Stack) Pop() (top int, err error) {
 
 //Push Operation, where element is added at the top of Stack
 func (stack *Stack) Push(x int) int {
+	log.InfoWithFields("Push into Stack", log.Fields{"x": x})
 	stack.elements = append(stack.elements, x)
 	stack.top += 1
 	stack.curr_size += 1
@@ -45,7 +47,7 @@ func (stack *Stack) Push(x int) int {
 
 //Peek Operation, where Top element of Stack can be seen.
 func (stack *Stack) Peek() (top int, err error) {
-	log.InfoWithFields(top, logFields("Peeking into Stack"))
+	log.InfoWithFields("Peeking into Stack", log.Fields{"top": top})
 	if stack.curr_size > 0 {
 		top = stack.elements[stack.top]
 		return
@@ -57,11 +59,7 @@ func (stack *Stack) Peek() (top int, err error) {
 //Initialize a Stack with initial values and return it
 func New() Stack {
 	//Initialization of Stack based using make
-	log.InfoWithFields("", logFields("Initializing Stack"))
+	log.InfoWithFields("Initializing Stack", log.Fields{})
 	var stack Stack = Stack{curr_size: 0, top: -1, elements: make([]int, 0, 0)}
 	return stack
-}
-
-func logFields(action string) log.Fields {
-	return log.Fields{"Action": action}
 }
