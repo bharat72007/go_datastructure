@@ -19,6 +19,7 @@ func SetLogLevel(level logrus.Level) {
 }
 
 func SetLogOutputMode(info_File, err_File string) {
+	//Discard Log Spitting Standard Output and Standard Error
 	logger.Out = ioutil.Discard
 	logger.Hooks.Add(lfshook.NewHook(lfshook.PathMap{
 		logrus.InfoLevel:  info_File,
