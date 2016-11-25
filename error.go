@@ -5,6 +5,7 @@ import "errors"
 var (
 	ErrorOverFlow  = errors.New("DataStructure is full")
 	ErrorUnderFlow = errors.New("DatatStructure is Empty")
+	ErrorNotFound  = errors.New("Element Not found in Data Structure")
 )
 
 type InvalidOperationError struct {
