@@ -13,15 +13,6 @@ type LinkedList struct {
 	size int
 }
 
-type Operations interface {
-	AddNode(interface{}) interface{}
-	SearchNode(interface{}) (interface{}, error)
-	DeleteNode(interface{}) (interface{}, error)
-	Empty() bool
-	Size() int
-	PrintList()
-}
-
 func New() *LinkedList {
 	linkedlist := LinkedList{head: nil, size: 0}
 	return &linkedlist
