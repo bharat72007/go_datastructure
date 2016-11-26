@@ -9,22 +9,22 @@ import "github.com/go_datastructure/common/log"
 //Defining strcut Queue which maintains, front and rear index and Holds a Integer Buffer
 type Queue struct {
 	front, rear int
-	buffer      []int
+	buffer      []interface{}
 }
 
 //Availble Contract Operations for Queue Structure
 type Operations interface {
-	Enque(int) int
-	Deque() (int, error)
-	Peek() (int, error)
+	Enque(interface{}) interface{}
+	Deque() (interface{}, error)
+	Peek() (interface{}, error)
 	Empty() bool
-	QueueSize() int
+	QueueSize() interface{}
 }
 
 //Initializing Queue with Default Values.
 func New() Queue {
 	//Making Use of Slice, Initialized similar to Array without mentioning size
-	var buf []int
+	var buf []interface{}
 	queue := Queue{front: -1, rear: -1, buffer: buf}
 	return queue
 }
@@ -44,7 +44,7 @@ func (queue *Queue) QueueSize() int {
 }
 
 //Peek the Front Element in Queue, If Queue is Empty return Error
-func (queue *Queue) Peek() (front int, err error) {
+func (queue *Queue) Peek() (front interface{}, err error) {
 	log.InfoWithFields("Peek into Queue", log.Fields{"fron": front})
 	if queue.Empty() {
 		err = go_datastructure.ErrorUnderFlow
@@ -55,7 +55,7 @@ func (queue *Queue) Peek() (front int, err error) {
 }
 
 //Enque Element to the end of the Queue
-func (queue *Queue) Enque(x int) int {
+func (queue *Queue) Enque(x interface{}) interface{} {
 	log.InfoWithFields("Enque Operation", log.Fields{"x": x})
 	queue.buffer = append(queue.buffer, x)
 	if queue.Empty() {
@@ -68,7 +68,7 @@ func (queue *Queue) Enque(x int) int {
 }
 
 //Deque Element from Front of the Queue, If Queue is Empty return Error
-func (queue *Queue) Deque() (front int, err error) {
+func (queue *Queue) Deque() (front interface{}, err error) {
 	log.InfoWithFields("Dequqe from Queue", log.Fields{"front": front})
 	if queue.Empty() {
 		err = go_datastructure.ErrorUnderFlow
