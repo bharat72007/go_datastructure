@@ -23,7 +23,7 @@ func NewNode(x interface{}) *Node {
 	return &node
 }
 
-func (linklist *LinkedList) Add(x interface{}) interface{} {
+func (linklist *LinkedList) AddNode(x interface{}) interface{} {
 	head := linklist.head
 	newnode := NewNode(x)
 	if head == nil {
